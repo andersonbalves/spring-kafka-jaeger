@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-cloud.version>Greenwich.SR6</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR11</spring-cloud.version>
         <version.opentracing.spring>0.2.0</version.opentracing.spring>
         <version.opentracing>0.31.0</version.opentracing>
     </properties>
@@ -102,7 +102,7 @@
             <plugin>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
-                <version>1.8.2</version>
+                <version>1.10.2</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
