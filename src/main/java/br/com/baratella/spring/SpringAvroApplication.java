@@ -27,6 +27,7 @@ public class SpringAvroApplication {
     return new NewTopic(topicName, partitions, replicationFactor);
   }
 
+
 }
 
 

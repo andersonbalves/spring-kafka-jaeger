@@ -1,7 +1,7 @@
 ---
 applications:
-  - name: spring-kafka-avro
-    path: target/kafka-avro-0.0.1-SNAPSHOT.jar
+  - name: spring-kafka-jaeger
+    path: target/kafka-jaeger-0.0.1-SNAPSHOT.jar
     memory: 2G
     instances: 1
     random-route: true

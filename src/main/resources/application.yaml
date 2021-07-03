@@ -36,17 +36,6 @@ spring:
     enabled: true
     storage:
       type: mem
-#    base-url: http://localhost:16686/api/v2/spans
-#  logging:
-#    level:
-#      root: info
-#opentracing:
-#  jaeger:
-#    http-sender:
-#      url: http://localhost:16686/api/traces
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        web: debug
-#    br.com.baratella.spring: debug
+io:
+  opentracing:
+    brave: brave-opentracing
