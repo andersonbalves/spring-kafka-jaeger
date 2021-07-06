@@ -44,9 +44,9 @@ and [`Jaeger`](https://www.jaegertracing.io/) integration .
   
   ```
   curl --location --request POST 'http://localhost:9080/user/publish' \
-    header 'Content-Type: application/x-www-form-urlencoded' \
-    data-urlencode 'name=TestName' \
-    data-urlencode 'age=32'
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'name=TestName' \
+    --data-urlencode 'age=32'
   ```
 
 ## Shutdown

@@ -48,7 +48,6 @@ services:
     healthcheck:
       test: "curl -f http://localhost:8081 || exit 1"
       start_period: 1m
-
   schema-registry-ui:
     image: landoop/schema-registry-ui:0.9.5
     container_name: kafka-schema-registry-ui
@@ -63,7 +62,6 @@ services:
     healthcheck:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
       start_period: 30s
-
   kafka-rest-proxy:
     image: confluentinc/cp-kafka-rest:6.1.1
     container_name: kafka-rest-proxy

@@ -9,10 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.baratella.kafka</groupId>
-    <artifactId>spring-kafka-jaeger</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>spring-kafka-jaeger</name>
+    <artifactId>spring-kafka-jaeger-parent</artifactId>
+    <version>0.0.1</version>
+    <name>spring-kafka-jaeger-parent</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>11</java.version>
@@ -20,6 +21,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
     </properties>
+
+    <modules>
+        <module>spring-kafka-example-first</module>
+        <module>spring-kafka-example-second</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -90,34 +96,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro-maven-plugin</artifactId>
-                <version>1.10.2</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>schema</goal>
-                        </goals>
-                        <configuration>
-                            <sourceDirectory>src/main/avro</sourceDirectory> <!-- <5> -->
-                            <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
-                            <stringType>String</stringType>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -127,16 +105,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.springframework.cloud</groupId>-->
-<!--                <artifactId>spring-cloud-sleuth</artifactId>-->
-<!--                <version>3.0.3</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
-
     <repositories>
         <repository>
             <id>confluent</id>      <!-- <4> -->

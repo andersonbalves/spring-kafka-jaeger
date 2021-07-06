@@ -1,0 +1,41 @@
+topic:
+  name: users
+  partitions-num: 3
+  replication-factor: 1
+server:
+  port: 9081
+spring:
+  application:
+    name: spring-kafka-example-second
+  kafka:
+    bootstrap-servers: localhost:29092
+    properties:
+      schema.registry.url: http://localhost:8081
+    consumer:
+      group-id: group_id_2
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringProducerInterceptor
+    template:
+      default-topic:
+  sleuth:
+    enabled: true
+    traceId128: true
+    sampler:
+      probability: 1.0
+    opentracing:
+      enabled: true
+  zipkin:
+    enabled: true
+    storage:
+      type: mem
+io:
+  opentracing:
+    brave: brave-opentracing
