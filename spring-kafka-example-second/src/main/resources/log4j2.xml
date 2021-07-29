@@ -6,17 +6,36 @@
     </Property>
   </Properties>
   <Appenders>
+    <SplunkHttp
+      name="splunk-http" url="http://localhost:8088/"
+      token="bccea2fb-9727-49b3-b345-2d8b0672d754"
+      host="localhost"
+      index="main"
+      type="raw"
+      source="http-log-event"
+      sourcetype="_json"
+      messageFormat="text"
+      disableCertificateValidation="true"
+      applicationName="spring-kafka-example-second"
+    >
+      <PatternLayout pattern="%m" />
+    </SplunkHttp>
+
     <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
       <PatternLayout pattern="${LOG_PATTERN}"/>
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="br.com.baratella.spring" level="debug" additivity="false">
-      <AppenderRef ref="ConsoleAppender" />
+    <Logger name="br.com.baratella.spring" level="debug" additivity="true">
+      <AppenderRef ref="ConsoleAppender"/>
+    </Logger>
+    <Logger name="br.com.baratella.spring" level="INFO" additivity="false">
+      <AppenderRef ref="splunk-http"/>
     </Logger>
 
-    <Root level="info">
-      <AppenderRef ref="ConsoleAppender" />
+    <Root level="INFO">
+      <AppenderRef ref="ConsoleAppender"/>
+      <AppenderRef ref="splunk-http"/>
     </Root>
   </Loggers>
 </Configuration>
