@@ -31,3 +31,8 @@ hs_err_pid*
 *.iws
 *.iml
 *.ipr
+*.classpath
+*.factorypath
+*.project
+*.settings/*
+*/.settings/*

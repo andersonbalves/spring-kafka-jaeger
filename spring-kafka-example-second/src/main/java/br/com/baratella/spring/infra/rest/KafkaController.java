@@ -1,10 +1,10 @@
-package br.com.baratella.spring.rest;
+package br.com.baratella.spring.infra.rest;
 
-import br.com.baratella.spring.kafka.Producer;
+import br.com.baratella.spring.infra.kafka.producer.Producer;
 import br.com.baratella.spring.kafka.avro.User;
 import io.opentracing.Tracer;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
 import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,24 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/user")
-@Slf4j
+@CommonsLog(topic = "Controller Logger")
+@RequiredArgsConstructor
 public class KafkaController {
 
   private final Producer producer;
 
-  @Autowired
-  private Tracer tracer;
+  private final Tracer tracer;
 
-  @Autowired
-  KafkaController(Producer producer) {
-    this.producer = producer;
-  }
 
-  @NewSpan("mySpan")
+  @NewSpan("ControllerKafka_2")
   @PostMapping(value = "/publish")
-  public void sendMessageToKafkaTopic(@SpanTag("name")@RequestParam("name") String name, @SpanTag("age") @RequestParam("age") Integer age) {
-//    log.debug("tracer: "+tracer);
-//    log.info("active span: "+tracer.activeSpan());
+  public void sendMessageToKafkaTopic(@SpanTag("name") @RequestParam("name") String name,
+      @SpanTag("age") @RequestParam("age") Integer age) {
     this.producer.sendMessage(new User(name, age));
   }
 }

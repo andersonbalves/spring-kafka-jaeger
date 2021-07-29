@@ -5,6 +5,7 @@ topic:
 server:
   port: 9081
 spring:
+
   application:
     name: spring-kafka-example-second
   kafka:
@@ -14,10 +15,13 @@ spring:
     consumer:
       group-id: group_id_2
       auto-offset-reset: latest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
+        specific.avro.reader: true
         interceptor.classes: io.confluent.monitoring.clients.interceptor.MonitoringConsumerInterceptor
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
@@ -26,6 +30,7 @@ spring:
     template:
       default-topic:
   sleuth:
+    probability: 1.0
     enabled: true
     traceId128: true
     sampler:
